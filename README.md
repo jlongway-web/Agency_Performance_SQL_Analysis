@@ -15,6 +15,6 @@ A relational SQLite database modeled to simulate a municipal service request sys
    * closed_date: The date the ticket was resolved.
    * status: The current state of the request (e.g., 'Closed', 'Pending').
   
-<img width="727" height="177" alt="image"  src="images/Agency_Load_Query.png" />
+<img width="800" height="200" alt="image"  src="images/Agency_Load_Query.png" />
 
-<img width="727" height="177" alt="image"  src="images/Agency_Load_results.png" />
+<img width="800" height="200" alt="image"  src="images/Agency_Load_results.png" />

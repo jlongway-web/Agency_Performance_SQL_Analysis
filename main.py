@@ -1,17 +1,39 @@
 import sqlite3
 import pandas as pd
 
-# Create a database in memory (it disappears when you close Python)
-conn = sqlite3.connect(':memory:')
+import sqlite3
+import pandas as pd
+import os
 
-# Create a tiny mock table
-mock_data = pd.DataFrame({
-    'agency_id': [1, 1, 2],
-    'agency': ['NYPD', 'NYPD', 'FDNY'],
-    'agency_name': ['Police', 'Police', 'Fire'],
-    'created_date': ['2023-01-01', '2023-01-15', '2023-01-10'],
-    'closed_date': ['2023-01-02', '2023-01-18', '2023-01-11'],
-    'status': ['Closed', 'Closed', 'Closed']
-})
+def run_analysis_suite(db_path, queries_folder):
+    # 1. Connect once
+    conn = sqlite3.connect(db_path)
+    
+    # 2. Get all .sql files from the folder
+    query_files = [f for f in os.listdir(queries_folder) if f.endswith('.sql')]
+    
+    print(f"🚀 Running {len(query_files)} analyses...\n")
 
-mock_data.to_sql('service_requests', conn, index=False)
+    for file_name in query_files:
+        # Construct full path
+        file_path = os.path.join(queries_folder, file_name)
+        
+        # Read the SQL
+        with open(file_path, 'r') as f:
+            query = f.read()
+        
+        # Run and Print
+        print(f"📊 REPORT: {file_name.upper().replace('_', ' ')}")
+        print("-" * 30)
+        try:
+            df = pd.read_sql(query, conn)
+            print(df)
+        except Exception as e:
+            print(f"❌ Error running {file_name}: {e}")
+        print("\n" + "="*50 + "\n")
+
+    conn.close()
+
+# Usage
+if __name__ == "__main__":
+    run_analysis_suite('agency_performance.db', 'queries')

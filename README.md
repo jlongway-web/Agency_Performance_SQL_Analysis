@@ -1,10 +1,10 @@
 # Agency_Performance_SQL_Analysis
 SQL demo analyzing Agency Performance data
 
-📊 Database Schema: City Agency Performance
-The project utilizes a relational SQLite database modeled to simulate a municipal service request system.
+📊 Database Schema:
+City Agency Performance The project utilizes a relational SQLite database modeled to simulate a municipal service request system.
 
-Table Relationships
+### Table Relationships
 1. agencies (Dimension Table)
 * agency_id (Primary Key): Unique identifier for each city department.
 * agency: Short-code (e.g., 'NYPD').

@@ -18,10 +18,12 @@ agencies_data.to_sql('agencies', conn, if_exists='replace', index=False)
 np.random.seed(42)
 start_date = datetime(2023, 1, 1)
 rows = []
-for i in range(50):
+for i in range(500):  # Boosted from 50 to 500
     created = start_date + timedelta(days=np.random.randint(0, 365))
-    # Closed date is 1-10 days after created
-    closed = created + timedelta(days=np.random.randint(1, 11))
+    # Randomly make some resolution times longer than others
+    days_to_close = np.random.choice([1, 2, 3, 5, 10, 15, 30]) 
+    closed = created + timedelta(days=int(days_to_close))
+    
     rows.append({
         'agency_id': np.random.choice([1, 2, 3, 4]),
         'created_date': created.strftime('%Y-%m-%d'),
@@ -32,4 +34,4 @@ for i in range(50):
 service_requests = pd.DataFrame(rows)
 service_requests.to_sql('service_requests', conn, if_exists='replace', index=False)
 
-print("Mock database 'agency_performance.db' created successfully!")
+print("Database rebuilt with 500 rows. Try running main.py now!")

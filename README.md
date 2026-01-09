@@ -1,6 +1,7 @@
 📊 Database Schema: City Agency Performance 
 
 A relational SQLite database modeled to simulate a municipal service request system.
+* See queries folder for more query examples
 
 ### Table Relationships
 1. agencies (Dimension Table)

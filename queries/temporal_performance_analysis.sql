@@ -6,7 +6,6 @@ SELECT
     COUNT(*) AS monthly_requests,
     ROUND(AVG(julianday(s.closed_date) - julianday(s.created_date)), 2) AS avg_resolution_days,
     
-    -- ADVANCED: Window Function to rank agencies by speed per month
     RANK() OVER (
         PARTITION BY strftime('%Y-%m', s.created_date) 
         ORDER BY AVG(julianday(s.closed_date) - julianday(s.created_date)) ASC
